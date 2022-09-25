@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Button, Form, Container, Row, Col } from "react-bootstrap";
 
 function Register() {
   const history = useNavigate();
@@ -20,36 +22,61 @@ function Register() {
     const data = await repsonse.json();
     console.log(data);
     if (data.status === "ok") {
+      alert("Registration successfull");
       history("/login");
+    } else {
+      alert("Error. Duplicate email or wrong data")
     }
   }
   return (
     <div className="App">
-      <h1>Register</h1>
-      <form onSubmit={registerUser}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-        />
-        <br />
-        <input
-          type="text"
-          placeholder="e-mail"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        <br />
-        <input type="submit" value="Register" />
-      </form>
-      <Link to="/login">
-        <button>Login page</button>
-      </Link>
+      <Container>
+        <h1 className="text-center mt-5">Register</h1>
+        <Form onSubmit={registerUser}>
+          <Row className="mb-3 mt-5">
+            <Col md={{ span: 4, offset: 4 }}>
+              <Form.Group controlId="nameInput">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Name"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={{ span: 4, offset: 4 }}>
+              <Form.Group controlId="emailInput">
+                <Form.Label>E-mail</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="e-mail"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row className="mb-4 mt-2">
+            <Col md={{ offset: 4 }}>
+              <Button type="submit">Register</Button>
+            </Col>
+          </Row>
+        </Form>
+        <Row className="mb-4 mt-2">
+          <Col md={{ offset: 4 }}>
+            <Link to="/login">
+              <Button>Login page</Button>
+            </Link>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }

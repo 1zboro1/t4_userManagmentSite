@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Button, Form, Container, Row, Col } from "react-bootstrap";
 
 function Login() {
   const [name, setName] = useState("");
@@ -26,47 +28,56 @@ function Login() {
     }
     console.log(data);
   }
-  // async function updateDate(e) {
-  //   e.preventDefault();
-  //   await fetch("http://localhost:1337/api/dashboard", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application.json",
-  //       "x-access-token": localStorage.getItem("token"),
-  //     },
-  //     body: JSON.stringify({
-  //       lastLogin: Date.now(),
-  //     }),
-  //   });
-  // }
 
   return (
     <div className="App">
-      <h1>Login</h1>
-      <form onSubmit={loginUser}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-        />
-        <br />
-        <input
-          type="text"
-          placeholder="e-mail"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        <br />
-        <input type="submit" value="Login" />
-      </form>
-      <Link to="/register">
-        <button>Register page</button>
-      </Link>
+      <Container>
+        <h1 className="text-center mt-5">Login</h1>
+        <Form onSubmit={loginUser}>
+          <Row className="mb-3 mt-5">
+            <Col md={{ span: 4, offset: 4 }}>
+              <Form.Group controlId="nameInput">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Name"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={{ span: 4, offset: 4 }}>
+              <Form.Group controlId="emailInput">
+                <Form.Label>E-mail</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="e-mail"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row className="mb-4 mt-2">
+            <Col md={{ offset: 4 }}>
+              <Button type="submit">Login</Button>
+            </Col>
+          </Row>
+        </Form>
+        <Row className="mb-4 mt-2">
+          <Col md={{ offset: 4 }}>
+            <Link to="/register">
+              <Button>Register page</Button>
+            </Link>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
