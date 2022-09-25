@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Form, Container, Row, Col } from "react-bootstrap";
 
 async function updateDate() {
+  const time = new Date().toLocaleString();
   await fetch("http://localhost:1337/api/dashboard", {
     method: "POST",
     headers: {
@@ -11,7 +12,7 @@ async function updateDate() {
       "x-access-token": localStorage.getItem("token"),
     },
     body: JSON.stringify({
-      lastLogin: Date.now(),
+      lastLogin: time,
     }),
   });
 }
@@ -34,6 +35,7 @@ function Login() {
     const data = await repsonse.json();
     if (data.user) {
       localStorage.setItem("token", data.user);
+      updateDate();
       alert("Login successful");
       window.location.href = "/dashboard";
     } else {
@@ -79,9 +81,7 @@ function Login() {
           </Row>
           <Row className="mb-4 mt-2">
             <Col md={{ offset: 4 }}>
-              <Button type="submit" onClick={updateDate}>
-                Login
-              </Button>
+              <Button type="submit">Login</Button>
             </Col>
           </Row>
         </Form>

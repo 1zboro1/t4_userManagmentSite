@@ -31,7 +31,7 @@ const Dashboard = () => {
   });
   return (
     <div>
-      <h1 className="text-center">Hello world!</h1>
+      <h1 className="text-center mb-5">Admin Panel</h1>
       <UserList />
     </div>
   );

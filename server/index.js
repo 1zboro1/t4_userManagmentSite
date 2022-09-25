@@ -1,8 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const mognoose = require("mongoose");
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 const User = require("./models/UserModel.js");
 const jwt = require("jsonwebtoken");
 
@@ -13,13 +12,15 @@ mongoose.connect("mongodb://localhost:27017/task4-database");
 
 app.post("/api/register", async (req, res) => {
   console.log(req.body);
+  const time = new Date().toLocaleString();
   try {
     await User.create({
       name: req.body.name,
       email: req.body.email,
       lastLogin: null,
-      created: Date.now(),
+      created: time,
       banned: false,
+      password: req.body.password,
     });
     res.json({ status: "ok" });
   } catch (err) {
@@ -30,15 +31,15 @@ app.post("/api/register", async (req, res) => {
 
 app.post("/api/login", async (req, res) => {
   const user = await User.findOne({
-    name: req.body.name,
     email: req.body.email,
+    password: req.body.password,
   });
 
   if (user) {
     const token = jwt.sign(
       {
-        name: user.name,
         email: user.email,
+        password: user.password,
       },
       "secret123"
     );
@@ -68,12 +69,23 @@ app.post("/api/dashboard", async (req, res) => {
   try {
     const decoded = jwt.verify(token, "secret123");
     const email = decoded.email;
-    await User.updateOne({ email: email }, { $set: { lastLogin: Date.now() } });
-    return { status: "ok", name: user.name };
+    const time = new Date().toLocaleString();
+    await User.updateOne({ email: email }, { $set: { lastLogin: time } });
+    return { status: "ok", name: User.name };
   } catch (err) {
     console.log(err);
     res.json({ status: "error", error: "invaild token" });
   }
+});
+
+app.get("/api/getUsers", (req, res) => {
+  User.find({}, (err, result) => {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(result);
+    }
+  });
 });
 
 app.listen(1337, () => {

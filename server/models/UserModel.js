@@ -4,9 +4,10 @@ const User = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    lastLogin: { type: Date, default: null },
-    created: { type: Date, default: Date.now },
+    lastLogin: { type: String, default: null },
+    created: { type: String, default: Date.now },
     banned: { type: Boolean, default: false },
+    password: { type: String, require: true },
   },
   { collection: "user-data" }
 );
