@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [name, setName] = useState("");
@@ -38,6 +39,7 @@ function Login() {
   //     }),
   //   });
   // }
+
   return (
     <div className="App">
       <h1>Login</h1>
@@ -60,8 +62,11 @@ function Login() {
           }}
         />
         <br />
-        <input type="submit" value="Login"/>
+        <input type="submit" value="Login" />
       </form>
+      <Link to="/register">
+        <button>Register page</button>
+      </Link>
     </div>
   );
 }

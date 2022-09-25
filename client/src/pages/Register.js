@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Register() {
   const history = useNavigate();
@@ -47,6 +47,9 @@ function Register() {
         <br />
         <input type="submit" value="Register" />
       </form>
+      <Link to="/login">
+        <button>Login page</button>
+      </Link>
     </div>
   );
 }
