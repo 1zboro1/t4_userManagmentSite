@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import jwt from "jsonwebtoken";
 import { useNavigate } from "react-router-dom";
 import UserList from "../UserList";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Dashboard = () => {
   const history = useNavigate();
@@ -30,7 +31,7 @@ const Dashboard = () => {
   });
   return (
     <div>
-      <h1>Hello world!</h1>
+      <h1 className="text-center">Hello world!</h1>
       <UserList />
     </div>
   );

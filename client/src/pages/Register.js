@@ -7,6 +7,7 @@ function Register() {
   const history = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   async function registerUser(e) {
     e.preventDefault();
     const repsonse = await fetch("http://localhost:1337/api/register", {
@@ -17,6 +18,7 @@ function Register() {
       body: JSON.stringify({
         name,
         email,
+        password,
       }),
     });
     const data = await repsonse.json();
@@ -25,7 +27,7 @@ function Register() {
       alert("Registration successfull");
       history("/login");
     } else {
-      alert("Error. Duplicate email or wrong data")
+      alert("Error. Duplicate email or wrong data");
     }
   }
   return (
@@ -48,7 +50,7 @@ function Register() {
               </Form.Group>
             </Col>
           </Row>
-          <Row>
+          <Row className="mb-3">
             <Col md={{ span: 4, offset: 4 }}>
               <Form.Group controlId="emailInput">
                 <Form.Label>E-mail</Form.Label>
@@ -58,6 +60,21 @@ function Register() {
                   value={email}
                   onChange={(e) => {
                     setEmail(e.target.value);
+                  }}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={{ span: 4, offset: 4 }}>
+              <Form.Group controlId="passwordInput">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
                   }}
                 />
               </Form.Group>

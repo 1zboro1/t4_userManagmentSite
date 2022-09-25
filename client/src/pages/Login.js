@@ -4,21 +4,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Form, Container, Row, Col } from "react-bootstrap";
 
 async function updateDate() {
-    await fetch("http://localhost:1337/api/dashboard", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application.json",
-        "x-access-token": localStorage.getItem("token"),
-      },
-      body: JSON.stringify({
-        lastLogin: Date.now(),
-      }),
-    });
-  }
+  await fetch("http://localhost:1337/api/dashboard", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application.json",
+      "x-access-token": localStorage.getItem("token"),
+    },
+    body: JSON.stringify({
+      lastLogin: Date.now(),
+    }),
+  });
+}
 
 function Login() {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   async function loginUser(e) {
     e.preventDefault();
     const repsonse = await fetch("http://localhost:1337/api/login", {
@@ -27,8 +27,8 @@ function Login() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name,
         email,
+        password,
       }),
     });
     const data = await repsonse.json();
@@ -49,21 +49,6 @@ function Login() {
         <Form onSubmit={loginUser}>
           <Row className="mb-3 mt-5">
             <Col md={{ span: 4, offset: 4 }}>
-              <Form.Group controlId="nameInput">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Name"
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={{ span: 4, offset: 4 }}>
               <Form.Group controlId="emailInput">
                 <Form.Label>E-mail</Form.Label>
                 <Form.Control
@@ -77,9 +62,26 @@ function Login() {
               </Form.Group>
             </Col>
           </Row>
+          <Row>
+            <Col md={{ span: 4, offset: 4 }}>
+              <Form.Group controlId="emailInput">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="password"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
           <Row className="mb-4 mt-2">
             <Col md={{ offset: 4 }}>
-              <Button type="submit" onClick={updateDate}>Login</Button>
+              <Button type="submit" onClick={updateDate}>
+                Login
+              </Button>
             </Col>
           </Row>
         </Form>
