@@ -3,6 +3,19 @@ import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Form, Container, Row, Col } from "react-bootstrap";
 
+async function updateDate() {
+    await fetch("http://localhost:1337/api/dashboard", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application.json",
+        "x-access-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({
+        lastLogin: Date.now(),
+      }),
+    });
+  }
+
 function Login() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -66,7 +79,7 @@ function Login() {
           </Row>
           <Row className="mb-4 mt-2">
             <Col md={{ offset: 4 }}>
-              <Button type="submit">Login</Button>
+              <Button type="submit" onClick={updateDate}>Login</Button>
             </Col>
           </Row>
         </Form>

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import jwt from "jsonwebtoken";
 import { useNavigate } from "react-router-dom";
+import UserList from "../UserList";
 
 const Dashboard = () => {
   const history = useNavigate();
@@ -27,6 +28,11 @@ const Dashboard = () => {
       }
     }
   });
-  return <h1>Hello World</h1>;
+  return (
+    <div>
+      <h1>Hello world!</h1>
+      <UserList />
+    </div>
+  );
 };
 export default Dashboard;
