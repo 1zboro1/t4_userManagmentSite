@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Table, Button, Image } from "react-bootstrap";
+import { Table, Button, Image, Container, Row, Col } from "react-bootstrap";
 import deleteIcon from "./icons/delete.svg";
 import unblockIcon from "./icons/unblock.svg";
 
@@ -15,6 +15,30 @@ function UserList() {
   }, []);
   return (
     <div className="usersDisplay">
+      <Container>
+        <Row>
+          <Col md={{ span: 3, offset: 5 }}>
+            <div className="mb-3">
+              <Button variant="danger" className="me-3">
+                Ban
+              </Button>
+              <Image
+                src={unblockIcon}
+                className="me-2"
+                onClick={() => {
+                  console.log("works1");
+                }}
+              />
+              <Image
+                src={deleteIcon}
+                onClick={() => {
+                  console.log("works2");
+                }}
+              />
+            </div>
+          </Col>
+        </Row>
+      </Container>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -27,7 +51,6 @@ function UserList() {
             <th>Last login date</th>
             <th>User create date</th>
             <th>User banned</th>
-            <th>Manage</th>
           </tr>
         </thead>
         <tbody>
@@ -43,24 +66,6 @@ function UserList() {
                 <td>{user.lastLogin ? user.lastLogin : "didn't login yet"}</td>
                 <td>{user.created}</td>
                 <td>{user.banned ? "Yes" : "No"}</td>
-                <td>
-                  <Button variant="danger" className="me-3">
-                    Ban
-                  </Button>
-                  <Image
-                    src={unblockIcon}
-                    className="me-2"
-                    onClick={() => {
-                      console.log("works1");
-                    }}
-                  />
-                  <Image
-                    src={deleteIcon}
-                    onClick={() => {
-                      console.log("works2");
-                    }}
-                  />
-                </td>
               </tr>
             );
           })}

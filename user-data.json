@@ -1,0 +1,23 @@
+[{
+  "_id": {
+    "$oid": "63307e948cbd44c64bb66846"
+  },
+  "name": "Bartosz Zborowski",
+  "email": "zboroplayshard@gmail.com",
+  "lastLogin": "25.09.2022, 18:18:14",
+  "created": "25.09.2022, 18:15:16",
+  "banned": false,
+  "password": "password",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63307f258cbd44c64bb6684e"
+  },
+  "name": "admin",
+  "email": "admin@admin.com",
+  "lastLogin": "25.09.2022, 18:17:49",
+  "created": "25.09.2022, 18:17:41",
+  "banned": false,
+  "password": "admin",
+  "__v": 0
+}]
