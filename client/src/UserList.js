@@ -41,14 +41,23 @@ function UserList() {
   return (
     <div className="usersDisplay">
       <Container>
-        <Row>
-          <Col md={{ span: 3, offset: 5 }}>
-            <div className="mb-3">
-              <Button variant="danger" className="me-3" onClick={deleteUser}>
+        <Row className="mb-3">
+          <Col md={{ span: 5, offset: 4 }}>
+            <div>
+              <Button
+                variant="danger"
+                size="lg"
+                className="me-5"
+                onClick={blockUser}
+              >
                 Ban
               </Button>
-              <Image src={unblockIcon} className="me-2" />
-              <Image src={deleteIcon} />
+              <Button className="me-5" size="sm" onClick={unblockUser}>
+                <Image src={unblockIcon} />
+              </Button>
+              <Button size="sm" onClick={deleteUser}>
+                <Image src={deleteIcon} />
+              </Button>
             </div>
           </Col>
         </Row>

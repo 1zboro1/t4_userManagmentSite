@@ -107,7 +107,7 @@ app.post("/api/blockUser", (req, res) => {
   const userList = req.body.checkedUsers;
   console.log(userList);
   var myquery = { _id: { $in: userList } };
-  User.deleteMany(myquery, function (err, result) {
+  User.updateMany(myquery, { $set: { banned: true } }, function (err, result) {
     if (err) console.log(err);
     else {
       console.log(res.json(result));
@@ -119,7 +119,7 @@ app.post("/api/unblockUser", (req, res) => {
   const userList = req.body.checkedUsers;
   console.log(userList);
   var myquery = { _id: { $in: userList } };
-  User.deleteMany(myquery, function (err, result) {
+  User.updateMany(myquery, { $set: { banned: false } }, function (err, result) {
     if (err) console.log(err);
     else {
       console.log(res.json(result));
