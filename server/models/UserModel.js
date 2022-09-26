@@ -8,6 +8,7 @@ const User = new mongoose.Schema(
     created: { type: String, default: Date.now },
     banned: { type: Boolean, default: false },
     password: { type: String, require: true },
+    checkbox: { type: Boolean, default: false },
   },
   { collection: "user-data" }
 );

@@ -39,7 +39,7 @@ function Login() {
       alert("Login successful");
       window.location.href = "/dashboard";
     } else {
-      alert("Login failed. Check your name and email");
+      alert("Login failed. Check your name and email. If data is good You may be banned");
     }
     console.log(data);
   }
@@ -66,7 +66,7 @@ function Login() {
           </Row>
           <Row>
             <Col md={{ span: 4, offset: 4 }}>
-              <Form.Group controlId="emailInput">
+              <Form.Group controlId="passwordInput">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"

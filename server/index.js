@@ -21,6 +21,7 @@ app.post("/api/register", async (req, res) => {
       created: time,
       banned: false,
       password: req.body.password,
+      checkbox: false,
     });
     res.json({ status: "ok" });
   } catch (err) {
@@ -33,6 +34,7 @@ app.post("/api/login", async (req, res) => {
   const user = await User.findOne({
     email: req.body.email,
     password: req.body.password,
+    banned: false,
   });
 
   if (user) {
@@ -40,6 +42,7 @@ app.post("/api/login", async (req, res) => {
       {
         email: user.email,
         password: user.password,
+        banned: false,
       },
       "secret123"
     );
@@ -84,6 +87,42 @@ app.get("/api/getUsers", (req, res) => {
       res.json(err);
     } else {
       res.json(result);
+    }
+  });
+});
+
+app.post("/api/deleteUser", (req, res) => {
+  const userList = req.body.checkedUsers;
+  console.log(userList);
+  var myquery = { _id: { $in: userList } };
+  User.deleteMany(myquery, function (err, result) {
+    if (err) console.log(err);
+    else {
+      console.log(res.json(result));
+    }
+  });
+});
+
+app.post("/api/blockUser", (req, res) => {
+  const userList = req.body.checkedUsers;
+  console.log(userList);
+  var myquery = { _id: { $in: userList } };
+  User.deleteMany(myquery, function (err, result) {
+    if (err) console.log(err);
+    else {
+      console.log(res.json(result));
+    }
+  });
+});
+
+app.post("/api/unblockUser", (req, res) => {
+  const userList = req.body.checkedUsers;
+  console.log(userList);
+  var myquery = { _id: { $in: userList } };
+  User.deleteMany(myquery, function (err, result) {
+    if (err) console.log(err);
+    else {
+      console.log(res.json(result));
     }
   });
 });
