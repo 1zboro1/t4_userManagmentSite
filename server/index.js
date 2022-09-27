@@ -8,7 +8,9 @@ const jwt = require("jsonwebtoken");
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb://localhost:27017/task4-database");
+mongoose.connect(
+  "mongodb+srv://1zboro1:Zborowski26@cluster0.hkyunpx.mongodb.net/t4_database"
+);
 
 app.post("/api/register", async (req, res) => {
   console.log(req.body);
