@@ -11,13 +11,13 @@ function UserList() {
   const forceUpdate = useReducer(() => ({}))[1];
 
   useEffect(() => {
-    Axios.get("http://localhost:1337/api/getUsers").then((response) => {
+    Axios.get("http://localhost:8080/api/getUsers").then((response) => {
       setListOfUsers(response.data);
     });
   }, []);
 
   const deleteUser = () => {
-    Axios.post("http://localhost:1337/api/deleteUser", {
+    Axios.post("http://localhost:8080/api/deleteUser", {
       checkedUsers: checkedUsers,
     }).then((response) => {
       alert("Users deleted");
@@ -25,7 +25,7 @@ function UserList() {
   };
 
   const blockUser = () => {
-    Axios.post("http://localhost:1337/api/blockUser", {
+    Axios.post("http://localhost:8080/api/blockUser", {
       checkedUsers: checkedUsers,
     }).then((response) => {
       alert("Users blocked");
@@ -33,7 +33,7 @@ function UserList() {
     forceUpdate();
   };
   const unblockUser = () => {
-    Axios.post("http://localhost:1337/api/unblockUser", {
+    Axios.post("http://localhost:8080/api/unblockUser", {
       checkedUsers: checkedUsers,
     }).then((response) => {
       alert("Users unblocked");

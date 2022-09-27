@@ -5,7 +5,7 @@ import { Button, Form, Container, Row, Col } from "react-bootstrap";
 
 async function updateDate() {
   const time = new Date().toLocaleString();
-  await fetch("http://localhost:1337/api/dashboard", {
+  await fetch("http://localhost:8080/api/dashboard", {
     method: "POST",
     headers: {
       "Content-Type": "application.json",
@@ -22,7 +22,7 @@ function Login() {
   const [password, setPassword] = useState("");
   async function loginUser(e) {
     e.preventDefault();
-    const repsonse = await fetch("http://localhost:1337/api/login", {
+    const repsonse = await fetch("http://localhost:8080/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

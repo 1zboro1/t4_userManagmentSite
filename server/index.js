@@ -4,17 +4,17 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const User = require("./models/UserModel.js");
 const jwt = require("jsonwebtoken");
+const path = require("path");
 
-let port = process.env.PORT;
-if (port == null || port == "") {
-  port = 1337;
-}
+let port = 8080;
+
 
 app.use(cors());
 app.use(express.json());
 
 mongoose.connect(
-  "mongodb+srv://1zboro1:Zborowski26@cluster0.hkyunpx.mongodb.net/t4_database"
+  process.env.MONGODB_URI ||
+    "mongodb+srv://1zboro1:Zborowski26@cluster0.hkyunpx.mongodb.net/t4_database"
 );
 
 app.post("/api/register", async (req, res) => {
@@ -133,6 +133,10 @@ app.post("/api/unblockUser", (req, res) => {
   });
 });
 
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(''))
+// }
+
 app.listen(port, () => {
-  console.log("Server running on port 1337");
+  console.log(`server on port ${port}`);
 });
