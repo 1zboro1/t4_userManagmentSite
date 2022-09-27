@@ -21,7 +21,6 @@ app.post("/api/register", async (req, res) => {
       created: time,
       banned: false,
       password: req.body.password,
-      checkbox: false,
     });
     res.json({ status: "ok" });
   } catch (err) {
@@ -60,7 +59,7 @@ app.get("/api/dashboard", async (req, res) => {
     const decoded = jwt.verify(token, "secret123");
     const email = decoded.email;
     const user = await User.findOne({ email: email });
-    return res.json({ status: "ok", name: user.name });
+    return res.json({ status: "ok", email: user.email });
   } catch (err) {
     console.log(err);
     res.json({ status: "error", error: "invaild token" });

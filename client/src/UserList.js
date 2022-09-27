@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 import Axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Table, Button, Image, Container, Row, Col } from "react-bootstrap";
@@ -8,6 +8,7 @@ import unblockIcon from "./icons/unblock.svg";
 function UserList() {
   const [listOfUsers, setListOfUsers] = useState([]);
   const [checkedUsers, setCheckedUsers] = useState([]);
+  const forceUpdate = useReducer(() => ({}))[1];
 
   useEffect(() => {
     Axios.get("http://localhost:1337/api/getUsers").then((response) => {
@@ -29,6 +30,7 @@ function UserList() {
     }).then((response) => {
       alert("Users blocked");
     });
+    forceUpdate();
   };
   const unblockUser = () => {
     Axios.post("http://localhost:1337/api/unblockUser", {
@@ -36,6 +38,7 @@ function UserList() {
     }).then((response) => {
       alert("Users unblocked");
     });
+    forceUpdate();
   };
 
   return (
