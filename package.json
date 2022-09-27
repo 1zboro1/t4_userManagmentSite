@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "build": "cd client && npm install",
+    "build": "cd client && npm build",
+    "install-client": "cd client && npm install",
     "client":"cd client && npm start"
   },
   "author": "",
