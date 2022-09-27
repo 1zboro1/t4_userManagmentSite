@@ -5,6 +5,11 @@ const mongoose = require("mongoose");
 const User = require("./models/UserModel.js");
 const jwt = require("jsonwebtoken");
 
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 1337;
+}
+
 app.use(cors());
 app.use(express.json());
 
@@ -128,6 +133,6 @@ app.post("/api/unblockUser", (req, res) => {
   });
 });
 
-app.listen(1337, () => {
+app.listen(port, () => {
   console.log("Server running on port 1337");
 });
